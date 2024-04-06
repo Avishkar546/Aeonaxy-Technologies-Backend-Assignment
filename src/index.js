@@ -10,7 +10,6 @@ dotenv.config();
 // Connecting to Neon cloud based database
 connectDB();
 
-// Instance for express
 const app = express();
 const PORT = process.env.PORT || 8080;
 
