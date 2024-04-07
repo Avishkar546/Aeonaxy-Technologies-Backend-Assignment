@@ -3,6 +3,7 @@ import errorHandler from "../utils/errorHandler.js";
 import { asyncHandler } from './../utils/asyncHandler.js';
 import getDataUri from './../utils/dataURI';
 import cloudinary from 'cloudinary';
+import { getAllCoursesController } from './courseController';
 
 // To get courses without lectures
 export const getAllCoursesController = asyncHandler(async (req, res, next) => {
