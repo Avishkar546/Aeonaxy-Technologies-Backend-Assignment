@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator";
 
-const userSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Please provide name"],
@@ -51,10 +51,9 @@ const userSchema = new mongoose.Schema({
         }
     ],
     
-    ResetPasswordToken: String,
-    ResetPasswordToken: String,
+    resetPasswordToken: String,
+    resetPasswordTokenExpire: String,
 }, { timestamps: true });
 
 const userModel = mongoose.model('users', userSchema);
-
 export default userModel;
