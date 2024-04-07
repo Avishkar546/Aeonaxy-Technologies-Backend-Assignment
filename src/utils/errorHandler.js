@@ -14,4 +14,4 @@ class errorHandler extends Error {
     }
 }
 
-module.exports = errorHandler;
+export default errorHandler;

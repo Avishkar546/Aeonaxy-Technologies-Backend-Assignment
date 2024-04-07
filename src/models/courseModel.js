@@ -79,4 +79,4 @@ const courseSchema = new mongoose.Schema({
 
 const courseModel = mongoose.model('course', courseSchema);
 
-return courseModel;
+export default courseModel;
