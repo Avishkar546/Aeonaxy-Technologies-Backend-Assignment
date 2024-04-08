@@ -6,6 +6,8 @@ import crypto from 'crypto';
 import { sendEmail } from '../utils/sendEmail.js';
 import courseModel from '../models/courseModel.js';
 import userModel from '../models/userModel.js';
+import getDataUri from "../utils/dataURI.js";
+import cloudinary from 'cloudinary';
 
 export const registerController = asyncHandler(async (req, res, next) => {
     const { name, email, password } = req.body;
@@ -139,7 +141,16 @@ export const updateProfileController = asyncHandler(async (req, res, next) => {
 })
 
 export const updateProfileImageController = asyncHandler(async (req, res, next) => {
+    const user = await userModel.findById(req.user._id);
 
+    const file = req.file;
+    if (!file) return next(errorHandler("Provide valid profile", 401));
+
+    const fileUri = getDataUri(file);
+    const myCloud = await cloudinary.v2.uploader(fileUri.content);
+
+    user.avatar.public_id = myCloud.public_id;
+    user.avatar.url = myCloud.secure_url;
 
     res.status(201).send({
         success: true,
