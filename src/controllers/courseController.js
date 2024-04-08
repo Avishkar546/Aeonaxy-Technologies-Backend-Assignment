@@ -7,7 +7,7 @@ import { getAllCoursesController } from './courseController';
 
 // To get courses without lectures
 export const getAllCoursesController = asyncHandler(async (req, res, next) => {
-    const course = await courseModel.find({}).select("-lectures");
+    const course = await courseModel.find({}).limit(10).select("-lectures");
 
     res.status(200).json({
         success: true,
@@ -133,5 +133,22 @@ export const deleteLectures = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: "Lecture deleted succesfully",
+    })
+})
+
+export const filterProducts = asyncHandler(async (req, res, next) => {
+    const { keywords } = req.params;
+
+    const result = await courseModel.find({
+        $or: [
+            { name: { $regex: keywords, $options: 'i' } },
+            { description: { $regex: keywords, $options: 'i' } },
+        ]
+    });
+
+    res.send({
+        success: true,
+        message: "Products fetched",
+        result
     })
 })

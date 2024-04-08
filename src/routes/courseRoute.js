@@ -4,6 +4,7 @@ import {
     createCourseController,
     deleteCourse,
     deleteLectures,
+    filterProducts,
     getAllCoursesController,
     getCourseLectures
 } from "../controllers/courseController.js";
@@ -23,5 +24,7 @@ router.get("/get-lectures/:id", isAuthenticated, singleUplaod, getCourseLectures
 router.post("/add-lectures", isAuthenticated, authorizeAdmin, singleUplaod, addLectures);
 
 router.delete("/delete-lecture", isAuthenticated, authorizeAdmin, deleteLectures);
+
+router.get("/filter-product/:keywords", filterProducts);
 
 export default router;
